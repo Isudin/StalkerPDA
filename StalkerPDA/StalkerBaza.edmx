@@ -1,0 +1,799 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="StalkerP4Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Asortyment">
+          <Key>
+            <PropertyRef Name="Id_przedmiotu" />
+          </Key>
+          <Property Name="Id_przedmiotu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Czlonkostwo">
+          <Key>
+            <PropertyRef Name="Id_czlonka" />
+          </Key>
+          <Property Name="Id_czlonka" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_stalkera" Type="int" Nullable="false" />
+          <Property Name="Id_frakcji" Type="int" Nullable="false" />
+          <Property Name="Stopien" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Data_dolaczenia" Type="date" Nullable="false" />
+          <Property Name="Data_odejscia" Type="date" />
+        </EntityType>
+        <EntityType Name="Frakcja">
+          <Key>
+            <PropertyRef Name="Id_frakcji" />
+          </Key>
+          <Property Name="Id_frakcji" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa_frakcji" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Siedziba" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Granica">
+          <Key>
+            <PropertyRef Name="Id_ukladu" />
+          </Key>
+          <Property Name="Id_ukladu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_terytorium_p" Type="int" Nullable="false" />
+          <Property Name="Id_terytorium_d" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Handlarz">
+          <Key>
+            <PropertyRef Name="Id_handlarza" />
+          </Key>
+          <Property Name="Id_handlarza" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imie" Type="varchar" MaxLength="50" />
+          <Property Name="Nazwisko" Type="varchar" MaxLength="50" />
+          <Property Name="Pseudonim" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id_terytorium" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Relacja">
+          <Key>
+            <PropertyRef Name="Id_relacji" />
+          </Key>
+          <Property Name="Id_relacji" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_frakcji_p" Type="int" Nullable="false" />
+          <Property Name="Id_frakcji_d" Type="int" Nullable="false" />
+          <Property Name="Rodzaj_relacji" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sprzedaz">
+          <Key>
+            <PropertyRef Name="Id_sprzedazy" />
+          </Key>
+          <Property Name="Id_sprzedazy" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_handlarza" Type="int" Nullable="false" />
+          <Property Name="Id_przedmiotu" Type="int" Nullable="false" />
+          <Property Name="Cena" Type="money" Nullable="false" />
+          <Property Name="Ilosc" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stalker">
+          <Key>
+            <PropertyRef Name="Id_stalkera" />
+          </Key>
+          <Property Name="Id_stalkera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imie" Type="varchar" MaxLength="50" />
+          <Property Name="Nazwisko" Type="varchar" MaxLength="50" />
+          <Property Name="Pseudonim" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ranga" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Ostatnia_znana_lokacja" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Terytorium">
+          <Key>
+            <PropertyRef Name="Id_terytorium" />
+          </Key>
+          <Property Name="Id_terytorium" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Powierzchnia" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id_frakcji" Type="int" />
+          <Property Name="Od_kiedy" Type="date" />
+        </EntityType>
+        <EntityType Name="Uklad">
+          <Key>
+            <PropertyRef Name="Id_ukladu" />
+          </Key>
+          <Property Name="Id_ukladu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_frakcji" Type="int" Nullable="false" />
+          <Property Name="Id_handlarza" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Czlonkost__Id_fr__5DCAEF64">
+          <End Role="Frakcja" Type="Self.Frakcja" Multiplicity="1" />
+          <End Role="Czlonkostwo" Type="Self.Czlonkostwo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Frakcja">
+              <PropertyRef Name="Id_frakcji" />
+            </Principal>
+            <Dependent Role="Czlonkostwo">
+              <PropertyRef Name="Id_frakcji" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Czlonkost__Id_st__5CD6CB2B">
+          <End Role="Stalker" Type="Self.Stalker" Multiplicity="1" />
+          <End Role="Czlonkostwo" Type="Self.Czlonkostwo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stalker">
+              <PropertyRef Name="Id_stalkera" />
+            </Principal>
+            <Dependent Role="Czlonkostwo">
+              <PropertyRef Name="Id_stalkera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Granica__Id_tery__3A81B327">
+          <End Role="Terytorium" Type="Self.Terytorium" Multiplicity="1" />
+          <End Role="Granica" Type="Self.Granica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terytorium">
+              <PropertyRef Name="Id_terytorium" />
+            </Principal>
+            <Dependent Role="Granica">
+              <PropertyRef Name="Id_terytorium_p" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Granica__Id_tery__3B75D760">
+          <End Role="Terytorium" Type="Self.Terytorium" Multiplicity="1" />
+          <End Role="Granica" Type="Self.Granica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terytorium">
+              <PropertyRef Name="Id_terytorium" />
+            </Principal>
+            <Dependent Role="Granica">
+              <PropertyRef Name="Id_terytorium_d" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Handlarz__Id_ter__35BCFE0A">
+          <End Role="Terytorium" Type="Self.Terytorium" Multiplicity="1" />
+          <End Role="Handlarz" Type="Self.Handlarz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terytorium">
+              <PropertyRef Name="Id_terytorium" />
+            </Principal>
+            <Dependent Role="Handlarz">
+              <PropertyRef Name="Id_terytorium" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Relacja__Id_frak__36B12243">
+          <End Role="Frakcja" Type="Self.Frakcja" Multiplicity="1" />
+          <End Role="Relacja" Type="Self.Relacja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Frakcja">
+              <PropertyRef Name="Id_frakcji" />
+            </Principal>
+            <Dependent Role="Relacja">
+              <PropertyRef Name="Id_frakcji_p" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Relacja__Id_frak__37A5467C">
+          <End Role="Frakcja" Type="Self.Frakcja" Multiplicity="1" />
+          <End Role="Relacja" Type="Self.Relacja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Frakcja">
+              <PropertyRef Name="Id_frakcji" />
+            </Principal>
+            <Dependent Role="Relacja">
+              <PropertyRef Name="Id_frakcji_d" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sprzedaz__Id_han__3C69FB99">
+          <End Role="Handlarz" Type="Self.Handlarz" Multiplicity="1" />
+          <End Role="Sprzedaz" Type="Self.Sprzedaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Handlarz">
+              <PropertyRef Name="Id_handlarza" />
+            </Principal>
+            <Dependent Role="Sprzedaz">
+              <PropertyRef Name="Id_handlarza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sprzedaz__Id_prz__3D5E1FD2">
+          <End Role="Asortyment" Type="Self.Asortyment" Multiplicity="1" />
+          <End Role="Sprzedaz" Type="Self.Sprzedaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asortyment">
+              <PropertyRef Name="Id_przedmiotu" />
+            </Principal>
+            <Dependent Role="Sprzedaz">
+              <PropertyRef Name="Id_przedmiotu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Terytoriu__Id_fr__34C8D9D1">
+          <End Role="Frakcja" Type="Self.Frakcja" Multiplicity="0..1" />
+          <End Role="Terytorium" Type="Self.Terytorium" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Frakcja">
+              <PropertyRef Name="Id_frakcji" />
+            </Principal>
+            <Dependent Role="Terytorium">
+              <PropertyRef Name="Id_frakcji" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Uklad__Id_frakcj__38996AB5">
+          <End Role="Frakcja" Type="Self.Frakcja" Multiplicity="1" />
+          <End Role="Uklad" Type="Self.Uklad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Frakcja">
+              <PropertyRef Name="Id_frakcji" />
+            </Principal>
+            <Dependent Role="Uklad">
+              <PropertyRef Name="Id_frakcji" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Uklad__Id_handla__398D8EEE">
+          <End Role="Handlarz" Type="Self.Handlarz" Multiplicity="1" />
+          <End Role="Uklad" Type="Self.Uklad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Handlarz">
+              <PropertyRef Name="Id_handlarza" />
+            </Principal>
+            <Dependent Role="Uklad">
+              <PropertyRef Name="Id_handlarza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StalkerP4ModelStoreContainer">
+          <EntitySet Name="Asortyment" EntityType="Self.Asortyment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Czlonkostwo" EntityType="Self.Czlonkostwo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Frakcja" EntityType="Self.Frakcja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Granica" EntityType="Self.Granica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Handlarz" EntityType="Self.Handlarz" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Relacja" EntityType="Self.Relacja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sprzedaz" EntityType="Self.Sprzedaz" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stalker" EntityType="Self.Stalker" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Terytorium" EntityType="Self.Terytorium" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uklad" EntityType="Self.Uklad" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Czlonkost__Id_fr__5DCAEF64" Association="Self.FK__Czlonkost__Id_fr__5DCAEF64">
+            <End Role="Frakcja" EntitySet="Frakcja" />
+            <End Role="Czlonkostwo" EntitySet="Czlonkostwo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Czlonkost__Id_st__5CD6CB2B" Association="Self.FK__Czlonkost__Id_st__5CD6CB2B">
+            <End Role="Stalker" EntitySet="Stalker" />
+            <End Role="Czlonkostwo" EntitySet="Czlonkostwo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Granica__Id_tery__3A81B327" Association="Self.FK__Granica__Id_tery__3A81B327">
+            <End Role="Terytorium" EntitySet="Terytorium" />
+            <End Role="Granica" EntitySet="Granica" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Granica__Id_tery__3B75D760" Association="Self.FK__Granica__Id_tery__3B75D760">
+            <End Role="Terytorium" EntitySet="Terytorium" />
+            <End Role="Granica" EntitySet="Granica" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Handlarz__Id_ter__35BCFE0A" Association="Self.FK__Handlarz__Id_ter__35BCFE0A">
+            <End Role="Terytorium" EntitySet="Terytorium" />
+            <End Role="Handlarz" EntitySet="Handlarz" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Relacja__Id_frak__36B12243" Association="Self.FK__Relacja__Id_frak__36B12243">
+            <End Role="Frakcja" EntitySet="Frakcja" />
+            <End Role="Relacja" EntitySet="Relacja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Relacja__Id_frak__37A5467C" Association="Self.FK__Relacja__Id_frak__37A5467C">
+            <End Role="Frakcja" EntitySet="Frakcja" />
+            <End Role="Relacja" EntitySet="Relacja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sprzedaz__Id_han__3C69FB99" Association="Self.FK__Sprzedaz__Id_han__3C69FB99">
+            <End Role="Handlarz" EntitySet="Handlarz" />
+            <End Role="Sprzedaz" EntitySet="Sprzedaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sprzedaz__Id_prz__3D5E1FD2" Association="Self.FK__Sprzedaz__Id_prz__3D5E1FD2">
+            <End Role="Asortyment" EntitySet="Asortyment" />
+            <End Role="Sprzedaz" EntitySet="Sprzedaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Terytoriu__Id_fr__34C8D9D1" Association="Self.FK__Terytoriu__Id_fr__34C8D9D1">
+            <End Role="Frakcja" EntitySet="Frakcja" />
+            <End Role="Terytorium" EntitySet="Terytorium" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Uklad__Id_frakcj__38996AB5" Association="Self.FK__Uklad__Id_frakcj__38996AB5">
+            <End Role="Frakcja" EntitySet="Frakcja" />
+            <End Role="Uklad" EntitySet="Uklad" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Uklad__Id_handla__398D8EEE" Association="Self.FK__Uklad__Id_handla__398D8EEE">
+            <End Role="Handlarz" EntitySet="Handlarz" />
+            <End Role="Uklad" EntitySet="Uklad" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StalkerP4Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Asortyment">
+          <Key>
+            <PropertyRef Name="Id_przedmiotu" />
+          </Key>
+          <Property Name="Id_przedmiotu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Sprzedaz" Relationship="Self.FK__Sprzedaz__Id_prz__3D5E1FD2" FromRole="Asortyment" ToRole="Sprzedaz" />
+        </EntityType>
+        <EntityType Name="Czlonkostwo">
+          <Key>
+            <PropertyRef Name="Id_czlonka" />
+          </Key>
+          <Property Name="Id_czlonka" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_stalkera" Type="Int32" Nullable="false" />
+          <Property Name="Id_frakcji" Type="Int32" Nullable="false" />
+          <Property Name="Stopien" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Data_dolaczenia" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Data_odejscia" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Frakcja" Relationship="Self.FK__Czlonkost__Id_fr__5DCAEF64" FromRole="Czlonkostwo" ToRole="Frakcja" />
+          <NavigationProperty Name="Stalker" Relationship="Self.FK__Czlonkost__Id_st__5CD6CB2B" FromRole="Czlonkostwo" ToRole="Stalker" />
+        </EntityType>
+        <EntityType Name="Frakcja">
+          <Key>
+            <PropertyRef Name="Id_frakcji" />
+          </Key>
+          <Property Name="Id_frakcji" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa_frakcji" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Siedziba" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Czlonkostwo" Relationship="Self.FK__Czlonkost__Id_fr__5DCAEF64" FromRole="Frakcja" ToRole="Czlonkostwo" />
+          <NavigationProperty Name="Relacja" Relationship="Self.FK__Relacja__Id_frak__36B12243" FromRole="Frakcja" ToRole="Relacja" />
+          <NavigationProperty Name="Relacja1" Relationship="Self.FK__Relacja__Id_frak__37A5467C" FromRole="Frakcja" ToRole="Relacja" />
+          <NavigationProperty Name="Terytorium" Relationship="Self.FK__Terytoriu__Id_fr__34C8D9D1" FromRole="Frakcja" ToRole="Terytorium" />
+          <NavigationProperty Name="Uklad" Relationship="Self.FK__Uklad__Id_frakcj__38996AB5" FromRole="Frakcja" ToRole="Uklad" />
+        </EntityType>
+        <EntityType Name="Granica">
+          <Key>
+            <PropertyRef Name="Id_ukladu" />
+          </Key>
+          <Property Name="Id_ukladu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_terytorium_p" Type="Int32" Nullable="false" />
+          <Property Name="Id_terytorium_d" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Terytorium" Relationship="Self.FK__Granica__Id_tery__3A81B327" FromRole="Granica" ToRole="Terytorium" />
+          <NavigationProperty Name="Terytorium1" Relationship="Self.FK__Granica__Id_tery__3B75D760" FromRole="Granica" ToRole="Terytorium" />
+        </EntityType>
+        <EntityType Name="Handlarz">
+          <Key>
+            <PropertyRef Name="Id_handlarza" />
+          </Key>
+          <Property Name="Id_handlarza" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nazwisko" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pseudonim" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id_terytorium" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Terytorium" Relationship="Self.FK__Handlarz__Id_ter__35BCFE0A" FromRole="Handlarz" ToRole="Terytorium" />
+          <NavigationProperty Name="Sprzedaz" Relationship="Self.FK__Sprzedaz__Id_han__3C69FB99" FromRole="Handlarz" ToRole="Sprzedaz" />
+          <NavigationProperty Name="Uklad" Relationship="Self.FK__Uklad__Id_handla__398D8EEE" FromRole="Handlarz" ToRole="Uklad" />
+        </EntityType>
+        <EntityType Name="Relacja">
+          <Key>
+            <PropertyRef Name="Id_relacji" />
+          </Key>
+          <Property Name="Id_relacji" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_frakcji_p" Type="Int32" Nullable="false" />
+          <Property Name="Id_frakcji_d" Type="Int32" Nullable="false" />
+          <Property Name="Rodzaj_relacji" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Frakcja" Relationship="Self.FK__Relacja__Id_frak__36B12243" FromRole="Relacja" ToRole="Frakcja" />
+          <NavigationProperty Name="Frakcja1" Relationship="Self.FK__Relacja__Id_frak__37A5467C" FromRole="Relacja" ToRole="Frakcja" />
+        </EntityType>
+        <EntityType Name="Sprzedaz">
+          <Key>
+            <PropertyRef Name="Id_sprzedazy" />
+          </Key>
+          <Property Name="Id_sprzedazy" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_handlarza" Type="Int32" Nullable="false" />
+          <Property Name="Id_przedmiotu" Type="Int32" Nullable="false" />
+          <Property Name="Cena" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Ilosc" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Asortyment" Relationship="Self.FK__Sprzedaz__Id_prz__3D5E1FD2" FromRole="Sprzedaz" ToRole="Asortyment" />
+          <NavigationProperty Name="Handlarz" Relationship="Self.FK__Sprzedaz__Id_han__3C69FB99" FromRole="Sprzedaz" ToRole="Handlarz" />
+        </EntityType>
+        <EntityType Name="Stalker">
+          <Key>
+            <PropertyRef Name="Id_stalkera" />
+          </Key>
+          <Property Name="Id_stalkera" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nazwisko" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pseudonim" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ranga" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ostatnia_znana_lokacja" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Czlonkostwo" Relationship="Self.FK__Czlonkost__Id_st__5CD6CB2B" FromRole="Stalker" ToRole="Czlonkostwo" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Terytorium">
+          <Key>
+            <PropertyRef Name="Id_terytorium" />
+          </Key>
+          <Property Name="Id_terytorium" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Powierzchnia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id_frakcji" Type="Int32" />
+          <Property Name="Od_kiedy" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Frakcja" Relationship="Self.FK__Terytoriu__Id_fr__34C8D9D1" FromRole="Terytorium" ToRole="Frakcja" />
+          <NavigationProperty Name="Granica" Relationship="Self.FK__Granica__Id_tery__3A81B327" FromRole="Terytorium" ToRole="Granica" />
+          <NavigationProperty Name="Granica1" Relationship="Self.FK__Granica__Id_tery__3B75D760" FromRole="Terytorium" ToRole="Granica" />
+          <NavigationProperty Name="Handlarz" Relationship="Self.FK__Handlarz__Id_ter__35BCFE0A" FromRole="Terytorium" ToRole="Handlarz" />
+        </EntityType>
+        <EntityType Name="Uklad">
+          <Key>
+            <PropertyRef Name="Id_ukladu" />
+          </Key>
+          <Property Name="Id_ukladu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_frakcji" Type="Int32" Nullable="false" />
+          <Property Name="Id_handlarza" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Frakcja" Relationship="Self.FK__Uklad__Id_frakcj__38996AB5" FromRole="Uklad" ToRole="Frakcja" />
+          <NavigationProperty Name="Handlarz" Relationship="Self.FK__Uklad__Id_handla__398D8EEE" FromRole="Uklad" ToRole="Handlarz" />
+        </EntityType>
+        <Association Name="FK__Sprzedaz__Id_prz__3D5E1FD2">
+          <End Role="Asortyment" Type="Self.Asortyment" Multiplicity="1" />
+          <End Role="Sprzedaz" Type="Self.Sprzedaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asortyment">
+              <PropertyRef Name="Id_przedmiotu" />
+            </Principal>
+            <Dependent Role="Sprzedaz">
+              <PropertyRef Name="Id_przedmiotu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Czlonkost__Id_fr__5DCAEF64">
+          <End Role="Frakcja" Type="Self.Frakcja" Multiplicity="1" />
+          <End Role="Czlonkostwo" Type="Self.Czlonkostwo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Frakcja">
+              <PropertyRef Name="Id_frakcji" />
+            </Principal>
+            <Dependent Role="Czlonkostwo">
+              <PropertyRef Name="Id_frakcji" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Czlonkost__Id_st__5CD6CB2B">
+          <End Role="Stalker" Type="Self.Stalker" Multiplicity="1" />
+          <End Role="Czlonkostwo" Type="Self.Czlonkostwo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stalker">
+              <PropertyRef Name="Id_stalkera" />
+            </Principal>
+            <Dependent Role="Czlonkostwo">
+              <PropertyRef Name="Id_stalkera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Relacja__Id_frak__36B12243">
+          <End Role="Frakcja" Type="Self.Frakcja" Multiplicity="1" />
+          <End Role="Relacja" Type="Self.Relacja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Frakcja">
+              <PropertyRef Name="Id_frakcji" />
+            </Principal>
+            <Dependent Role="Relacja">
+              <PropertyRef Name="Id_frakcji_p" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Relacja__Id_frak__37A5467C">
+          <End Role="Frakcja" Type="Self.Frakcja" Multiplicity="1" />
+          <End Role="Relacja" Type="Self.Relacja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Frakcja">
+              <PropertyRef Name="Id_frakcji" />
+            </Principal>
+            <Dependent Role="Relacja">
+              <PropertyRef Name="Id_frakcji_d" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Terytoriu__Id_fr__34C8D9D1">
+          <End Role="Frakcja" Type="Self.Frakcja" Multiplicity="0..1" />
+          <End Role="Terytorium" Type="Self.Terytorium" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Frakcja">
+              <PropertyRef Name="Id_frakcji" />
+            </Principal>
+            <Dependent Role="Terytorium">
+              <PropertyRef Name="Id_frakcji" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Uklad__Id_frakcj__38996AB5">
+          <End Role="Frakcja" Type="Self.Frakcja" Multiplicity="1" />
+          <End Role="Uklad" Type="Self.Uklad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Frakcja">
+              <PropertyRef Name="Id_frakcji" />
+            </Principal>
+            <Dependent Role="Uklad">
+              <PropertyRef Name="Id_frakcji" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Granica__Id_tery__3A81B327">
+          <End Role="Terytorium" Type="Self.Terytorium" Multiplicity="1" />
+          <End Role="Granica" Type="Self.Granica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terytorium">
+              <PropertyRef Name="Id_terytorium" />
+            </Principal>
+            <Dependent Role="Granica">
+              <PropertyRef Name="Id_terytorium_p" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Granica__Id_tery__3B75D760">
+          <End Role="Terytorium" Type="Self.Terytorium" Multiplicity="1" />
+          <End Role="Granica" Type="Self.Granica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terytorium">
+              <PropertyRef Name="Id_terytorium" />
+            </Principal>
+            <Dependent Role="Granica">
+              <PropertyRef Name="Id_terytorium_d" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Handlarz__Id_ter__35BCFE0A">
+          <End Role="Terytorium" Type="Self.Terytorium" Multiplicity="1" />
+          <End Role="Handlarz" Type="Self.Handlarz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terytorium">
+              <PropertyRef Name="Id_terytorium" />
+            </Principal>
+            <Dependent Role="Handlarz">
+              <PropertyRef Name="Id_terytorium" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sprzedaz__Id_han__3C69FB99">
+          <End Role="Handlarz" Type="Self.Handlarz" Multiplicity="1" />
+          <End Role="Sprzedaz" Type="Self.Sprzedaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Handlarz">
+              <PropertyRef Name="Id_handlarza" />
+            </Principal>
+            <Dependent Role="Sprzedaz">
+              <PropertyRef Name="Id_handlarza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Uklad__Id_handla__398D8EEE">
+          <End Role="Handlarz" Type="Self.Handlarz" Multiplicity="1" />
+          <End Role="Uklad" Type="Self.Uklad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Handlarz">
+              <PropertyRef Name="Id_handlarza" />
+            </Principal>
+            <Dependent Role="Uklad">
+              <PropertyRef Name="Id_handlarza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StalkerP4Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Asortyment" EntityType="Self.Asortyment" />
+          <EntitySet Name="Czlonkostwo" EntityType="Self.Czlonkostwo" />
+          <EntitySet Name="Frakcja" EntityType="Self.Frakcja" />
+          <EntitySet Name="Granica" EntityType="Self.Granica" />
+          <EntitySet Name="Handlarz" EntityType="Self.Handlarz" />
+          <EntitySet Name="Relacja" EntityType="Self.Relacja" />
+          <EntitySet Name="Sprzedaz" EntityType="Self.Sprzedaz" />
+          <EntitySet Name="Stalker" EntityType="Self.Stalker" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Terytorium" EntityType="Self.Terytorium" />
+          <EntitySet Name="Uklad" EntityType="Self.Uklad" />
+          <AssociationSet Name="FK__Sprzedaz__Id_prz__3D5E1FD2" Association="Self.FK__Sprzedaz__Id_prz__3D5E1FD2">
+            <End Role="Asortyment" EntitySet="Asortyment" />
+            <End Role="Sprzedaz" EntitySet="Sprzedaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Czlonkost__Id_fr__5DCAEF64" Association="Self.FK__Czlonkost__Id_fr__5DCAEF64">
+            <End Role="Frakcja" EntitySet="Frakcja" />
+            <End Role="Czlonkostwo" EntitySet="Czlonkostwo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Czlonkost__Id_st__5CD6CB2B" Association="Self.FK__Czlonkost__Id_st__5CD6CB2B">
+            <End Role="Stalker" EntitySet="Stalker" />
+            <End Role="Czlonkostwo" EntitySet="Czlonkostwo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Relacja__Id_frak__36B12243" Association="Self.FK__Relacja__Id_frak__36B12243">
+            <End Role="Frakcja" EntitySet="Frakcja" />
+            <End Role="Relacja" EntitySet="Relacja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Relacja__Id_frak__37A5467C" Association="Self.FK__Relacja__Id_frak__37A5467C">
+            <End Role="Frakcja" EntitySet="Frakcja" />
+            <End Role="Relacja" EntitySet="Relacja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Terytoriu__Id_fr__34C8D9D1" Association="Self.FK__Terytoriu__Id_fr__34C8D9D1">
+            <End Role="Frakcja" EntitySet="Frakcja" />
+            <End Role="Terytorium" EntitySet="Terytorium" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Uklad__Id_frakcj__38996AB5" Association="Self.FK__Uklad__Id_frakcj__38996AB5">
+            <End Role="Frakcja" EntitySet="Frakcja" />
+            <End Role="Uklad" EntitySet="Uklad" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Granica__Id_tery__3A81B327" Association="Self.FK__Granica__Id_tery__3A81B327">
+            <End Role="Terytorium" EntitySet="Terytorium" />
+            <End Role="Granica" EntitySet="Granica" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Granica__Id_tery__3B75D760" Association="Self.FK__Granica__Id_tery__3B75D760">
+            <End Role="Terytorium" EntitySet="Terytorium" />
+            <End Role="Granica" EntitySet="Granica" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Handlarz__Id_ter__35BCFE0A" Association="Self.FK__Handlarz__Id_ter__35BCFE0A">
+            <End Role="Terytorium" EntitySet="Terytorium" />
+            <End Role="Handlarz" EntitySet="Handlarz" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sprzedaz__Id_han__3C69FB99" Association="Self.FK__Sprzedaz__Id_han__3C69FB99">
+            <End Role="Handlarz" EntitySet="Handlarz" />
+            <End Role="Sprzedaz" EntitySet="Sprzedaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Uklad__Id_handla__398D8EEE" Association="Self.FK__Uklad__Id_handla__398D8EEE">
+            <End Role="Handlarz" EntitySet="Handlarz" />
+            <End Role="Uklad" EntitySet="Uklad" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StalkerP4ModelStoreContainer" CdmEntityContainer="StalkerP4Entities">
+          <EntitySetMapping Name="Asortyment">
+            <EntityTypeMapping TypeName="StalkerP4Model.Asortyment">
+              <MappingFragment StoreEntitySet="Asortyment">
+                <ScalarProperty Name="Id_przedmiotu" ColumnName="Id_przedmiotu" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Czlonkostwo">
+            <EntityTypeMapping TypeName="StalkerP4Model.Czlonkostwo">
+              <MappingFragment StoreEntitySet="Czlonkostwo">
+                <ScalarProperty Name="Id_czlonka" ColumnName="Id_czlonka" />
+                <ScalarProperty Name="Id_stalkera" ColumnName="Id_stalkera" />
+                <ScalarProperty Name="Id_frakcji" ColumnName="Id_frakcji" />
+                <ScalarProperty Name="Stopien" ColumnName="Stopien" />
+                <ScalarProperty Name="Data_dolaczenia" ColumnName="Data_dolaczenia" />
+                <ScalarProperty Name="Data_odejscia" ColumnName="Data_odejscia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Frakcja">
+            <EntityTypeMapping TypeName="StalkerP4Model.Frakcja">
+              <MappingFragment StoreEntitySet="Frakcja">
+                <ScalarProperty Name="Id_frakcji" ColumnName="Id_frakcji" />
+                <ScalarProperty Name="Nazwa_frakcji" ColumnName="Nazwa_frakcji" />
+                <ScalarProperty Name="Siedziba" ColumnName="Siedziba" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Granica">
+            <EntityTypeMapping TypeName="StalkerP4Model.Granica">
+              <MappingFragment StoreEntitySet="Granica">
+                <ScalarProperty Name="Id_ukladu" ColumnName="Id_ukladu" />
+                <ScalarProperty Name="Id_terytorium_p" ColumnName="Id_terytorium_p" />
+                <ScalarProperty Name="Id_terytorium_d" ColumnName="Id_terytorium_d" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Handlarz">
+            <EntityTypeMapping TypeName="StalkerP4Model.Handlarz">
+              <MappingFragment StoreEntitySet="Handlarz">
+                <ScalarProperty Name="Id_handlarza" ColumnName="Id_handlarza" />
+                <ScalarProperty Name="Imie" ColumnName="Imie" />
+                <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+                <ScalarProperty Name="Pseudonim" ColumnName="Pseudonim" />
+                <ScalarProperty Name="Id_terytorium" ColumnName="Id_terytorium" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Relacja">
+            <EntityTypeMapping TypeName="StalkerP4Model.Relacja">
+              <MappingFragment StoreEntitySet="Relacja">
+                <ScalarProperty Name="Id_relacji" ColumnName="Id_relacji" />
+                <ScalarProperty Name="Id_frakcji_p" ColumnName="Id_frakcji_p" />
+                <ScalarProperty Name="Id_frakcji_d" ColumnName="Id_frakcji_d" />
+                <ScalarProperty Name="Rodzaj_relacji" ColumnName="Rodzaj_relacji" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sprzedaz">
+            <EntityTypeMapping TypeName="StalkerP4Model.Sprzedaz">
+              <MappingFragment StoreEntitySet="Sprzedaz">
+                <ScalarProperty Name="Id_sprzedazy" ColumnName="Id_sprzedazy" />
+                <ScalarProperty Name="Id_handlarza" ColumnName="Id_handlarza" />
+                <ScalarProperty Name="Id_przedmiotu" ColumnName="Id_przedmiotu" />
+                <ScalarProperty Name="Cena" ColumnName="Cena" />
+                <ScalarProperty Name="Ilosc" ColumnName="Ilosc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stalker">
+            <EntityTypeMapping TypeName="StalkerP4Model.Stalker">
+              <MappingFragment StoreEntitySet="Stalker">
+                <ScalarProperty Name="Id_stalkera" ColumnName="Id_stalkera" />
+                <ScalarProperty Name="Imie" ColumnName="Imie" />
+                <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+                <ScalarProperty Name="Pseudonim" ColumnName="Pseudonim" />
+                <ScalarProperty Name="Ranga" ColumnName="Ranga" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Ostatnia_znana_lokacja" ColumnName="Ostatnia_znana_lokacja" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="StalkerP4Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Terytorium">
+            <EntityTypeMapping TypeName="StalkerP4Model.Terytorium">
+              <MappingFragment StoreEntitySet="Terytorium">
+                <ScalarProperty Name="Id_terytorium" ColumnName="Id_terytorium" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="Powierzchnia" ColumnName="Powierzchnia" />
+                <ScalarProperty Name="Id_frakcji" ColumnName="Id_frakcji" />
+                <ScalarProperty Name="Od_kiedy" ColumnName="Od_kiedy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uklad">
+            <EntityTypeMapping TypeName="StalkerP4Model.Uklad">
+              <MappingFragment StoreEntitySet="Uklad">
+                <ScalarProperty Name="Id_ukladu" ColumnName="Id_ukladu" />
+                <ScalarProperty Name="Id_frakcji" ColumnName="Id_frakcji" />
+                <ScalarProperty Name="Id_handlarza" ColumnName="Id_handlarza" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

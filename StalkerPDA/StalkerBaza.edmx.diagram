@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a11a74a7db7443309cdde7ae9106f4f9" Name="Diagram1">
+        <EntityTypeShape EntityType="StalkerP4Model.Asortyment" Width="1.5" PointX="5.25" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StalkerP4Model.Czlonkostwo" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StalkerP4Model.Frakcja" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StalkerP4Model.Granica" Width="1.5" PointX="5.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StalkerP4Model.Handlarz" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StalkerP4Model.Relacja" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StalkerP4Model.Sprzedaz" Width="1.5" PointX="7.5" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StalkerP4Model.Stalker" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StalkerP4Model.sysdiagrams" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StalkerP4Model.Terytorium" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="StalkerP4Model.Uklad" Width="1.5" PointX="7.5" PointY="10.625" IsExpanded="true" />
+        <AssociationConnector Association="StalkerP4Model.FK__Sprzedaz__Id_prz__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="StalkerP4Model.FK__Czlonkost__Id_fr__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="StalkerP4Model.FK__Czlonkost__Id_st__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="StalkerP4Model.FK__Relacja__Id_frak__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="StalkerP4Model.FK__Relacja__Id_frak__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="StalkerP4Model.FK__Terytoriu__Id_fr__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="StalkerP4Model.FK__Uklad__Id_frakcj__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="StalkerP4Model.FK__Granica__Id_tery__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="StalkerP4Model.FK__Granica__Id_tery__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="StalkerP4Model.FK__Handlarz__Id_ter__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="StalkerP4Model.FK__Sprzedaz__Id_han__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="StalkerP4Model.FK__Uklad__Id_handla__398D8EEE" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
